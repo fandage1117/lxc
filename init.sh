@@ -2,15 +2,15 @@
 rm -rf log
 lxc init images:debian/10 "$1" -c limits.cpu=2 -c limits.memory=2048MiB
 # 硬盘大小
-lxc config device override "$1" root size=40GB
-lxc config device set "$1" root limits.max 40GB
+lxc config device override "$1" root size=100GB
+lxc config device set "$1" root limits.max 100GB
 # IO
-lxc config device set "$1" root limits.read 100MB
-lxc config device set "$1" root limits.write 100MB
-lxc config device set "$1" root limits.read 100iops
-lxc config device set "$1" root limits.write 100iops
+lxc config device set "$1" root limits.read 500MB
+lxc config device set "$1" root limits.write 500MB
+lxc config device set "$1" root limits.read 500iops
+lxc config device set "$1" root limits.write 500iops
 # 网速
-lxc config device override "$1" eth0 limits.egress=300Mbit limits.ingress=300Mbit
+lxc config device override "$1" eth0 limits.egress=3000Mbit limits.ingress=3000Mbit
 # cpu
 lxc config set "$1" limits.cpu.priority 0
 lxc config set "$1" limits.cpu.allowance 50%
